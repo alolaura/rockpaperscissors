@@ -1,5 +1,7 @@
-public class Rock implements Shape {
-    private final String type = "rock";
+package shapes;
+
+public class Scissors implements Shape {
+    private final String type = "scissors";
     @Override
     public String getType() {
         return type;
@@ -10,7 +12,7 @@ public class Rock implements Shape {
         if(shape.getType().equals(type)){
             return "DRAW";
         }
-        else if(shape.getType().equals("paper")){
+        else if(shape.getType().equals("rock")){
             return "LOSER";
         }
         else {

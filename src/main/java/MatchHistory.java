@@ -1,4 +1,3 @@
-import javax.json.bind.annotation.JsonbNillable;
 import javax.json.bind.annotation.JsonbProperty;
 
 public class MatchHistory {
@@ -13,14 +12,6 @@ public class MatchHistory {
         this.round = round;
         this.winner = winner;
         this.inputs = inputs;
-    }
-
-    public int getRound() {
-        return round;
-    }
-
-    public String getWinner() {
-        return winner;
     }
 
     public Inputs getInputs() {

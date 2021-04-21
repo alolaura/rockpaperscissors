@@ -1,5 +1,5 @@
-import java.util.ArrayList;
-import java.util.Collections;
+import shapes.Shape;
+
 import java.util.List;
 
 public class Player implements Runnable {

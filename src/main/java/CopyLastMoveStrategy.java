@@ -1,7 +1,12 @@
+import shapes.Paper;
+import shapes.Rock;
+import shapes.Scissors;
+import shapes.Shape;
+
 import java.util.List;
 import java.util.Random;
 
-public class CopyLastMoveStrategy implements Strategy{
+public class CopyLastMoveStrategy implements Strategy {
     private Shape shape;
     private final Random random = new Random();
     private List<MatchHistory> historyList;

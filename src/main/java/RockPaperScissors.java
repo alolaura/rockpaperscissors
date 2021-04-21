@@ -1,3 +1,5 @@
+import shapes.Shape;
+
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.json.bind.JsonbConfig;
@@ -11,17 +13,17 @@ import java.util.List;
 
 public class RockPaperScissors {
 
-    public static void sendListToJson(List<MatchHistory> matchHistoryList){
+    public static void writeFile(List<MatchHistory> matchHistoryList){
         JsonbConfig jsonbConfig = new JsonbConfig()
                 .withPropertyNamingStrategy(PropertyNamingStrategy.CASE_INSENSITIVE)
                 .withNullValues(true);
-
+        String fileName = "result.json";
         Jsonb jsonb = JsonbBuilder.create(jsonbConfig);
         String result = jsonb.toJson(matchHistoryList);
         try {
             String cwd = System.getProperty("user.dir");
-            Files.write( Paths.get(cwd + "\\result.json"),result.getBytes());
-            System.out.println("File result.json generated in " + cwd);
+            Files.write( Paths.get(cwd + fileName),result.getBytes());
+            System.out.println("File " + fileName + " generated in " + cwd);
         }
         catch (IOException e) {
             e.printStackTrace();
@@ -69,6 +71,8 @@ public class RockPaperScissors {
             matchHistory = new MatchHistory(roundNo + 1, winner, new Inputs(p1Shape.getType(), p2Shape.getType()));
             matchHistoryList.add(matchHistory);
         }
-        sendListToJson(matchHistoryList);
+        t1.join();
+        t2.join();
+        writeFile(matchHistoryList);
     }
 }

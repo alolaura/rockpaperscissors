@@ -1,3 +1,5 @@
+package shapes;
+
 public class Paper implements Shape {
     private final String type = "paper";
     @Override

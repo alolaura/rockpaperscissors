@@ -1,10 +1,16 @@
+import shapes.Paper;
+import shapes.Rock;
+import shapes.Scissors;
+import shapes.Shape;
+
 import java.util.List;
 import java.util.Random;
 
-public class RandomStrategy implements Strategy{
+public class RandomStrategy implements Strategy {
     private final Random random = new Random();
     private Shape shape;
     private List<MatchHistory> historyList;
+
     @Override
     public Shape getShape(){
         int shapeId = random.nextInt(3);
