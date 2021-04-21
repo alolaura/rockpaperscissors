@@ -11,13 +11,13 @@ import java.util.List;
 
 public class RockPaperScissors {
 
-    public static void sendListToJson(List<MatchHistory> historyList){
+    public static void sendListToJson(List<MatchHistory> matchHistoryList){
         JsonbConfig jsonbConfig = new JsonbConfig()
                 .withPropertyNamingStrategy(PropertyNamingStrategy.CASE_INSENSITIVE)
                 .withNullValues(true);
 
         Jsonb jsonb = JsonbBuilder.create(jsonbConfig);
-        String result = jsonb.toJson(historyList);
+        String result = jsonb.toJson(matchHistoryList);
         try {
             String cwd = System.getProperty("user.dir");
             Files.write( Paths.get(cwd + "\\result.json"),result.getBytes());
@@ -29,8 +29,8 @@ public class RockPaperScissors {
     }
 
     public static void main(String[] args) throws InterruptedException {
-        int rounds = 10;
-        List<MatchHistory> syncList = Collections.synchronizedList(new ArrayList<>());
+        int rounds = 100;
+        List<MatchHistory> matchHistoryList = Collections.synchronizedList(new ArrayList<>());
 
         Strategy randomStrategy = new RandomStrategy();
         Strategy copyMoveStrategy = new CopyLastMoveStrategy();
@@ -38,23 +38,23 @@ public class RockPaperScissors {
         Player p1 = new Player("Player1", randomStrategy, rounds);
         Player p2 = new Player("Player2", copyMoveStrategy, rounds);
 
-        Thread thread1 = new Thread(p1);
-        Thread thread2 = new Thread(p2);
+        Thread t1 = new Thread(p1);
+        Thread t2 = new Thread(p2);
 
-        thread1.start();
-        thread2.start();
+        t1.start();
+        t2.start();
 
         for(int roundNo = 0; roundNo < rounds; roundNo++){
-            MatchHistory history;
+            MatchHistory matchHistory;
             Shape p1Shape;
             Shape p2Shape;
             String winner;
 
-            while(thread1.getState() != Thread.State.WAITING) {};
-            p1Shape = p1.getPlayerShape(syncList);
+            while(t1.getState() != Thread.State.WAITING) {}
+            p1Shape = p1.getPlayerShape(matchHistoryList);
 
-            while(thread2.getState() != Thread.State.WAITING) {};
-            p2Shape = p2.getPlayerShape(syncList);
+            while(t2.getState() != Thread.State.WAITING) {}
+            p2Shape = p2.getPlayerShape(matchHistoryList);
 
             if(p1Shape.versus(p2Shape).equals("WINNER")){
                 winner = p1.getName();
@@ -66,25 +66,9 @@ public class RockPaperScissors {
                 winner = null;
             }
 
-            history = new MatchHistory(roundNo + 1, winner, new Inputs(p1Shape.getType(), p2Shape.getType()));
-            syncList.add(history);
+            matchHistory = new MatchHistory(roundNo + 1, winner, new Inputs(p1Shape.getType(), p2Shape.getType()));
+            matchHistoryList.add(matchHistory);
         }
-
-        sendListToJson(syncList);
-//        JsonbConfig jsonbConfig = new JsonbConfig()
-//                .withPropertyNamingStrategy(PropertyNamingStrategy.CASE_INSENSITIVE)
-//                .withNullValues(true);
-//
-//        Jsonb jsonb = JsonbBuilder.create(jsonbConfig);
-//        String result = jsonb.toJson(syncList);
-//        try (FileWriter file = new FileWriter("result.json")) {
-//            file.write(result);
-//            file.flush();
-//
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
-
+        sendListToJson(matchHistoryList);
     }
 }

@@ -7,10 +7,10 @@ public class Paper implements Shape {
 
     @Override
     public String versus(Shape shape) {
-        if(type.equals(shape.getType())){
+        if(shape.getType().equals(type)){
             return "DRAW";
         }
-        else if("scissors".equals(shape.getType())){
+        else if(shape.getType().equals("scissors")){
             return "LOSER";
         }
         else {

@@ -2,11 +2,10 @@ import java.util.List;
 import java.util.Random;
 
 public class CopyLastMoveStrategy implements Strategy{
-    //private Random random = new Random();
-    //private int shapeId;
     private Shape shape;
     private final Random random = new Random();
     private List<MatchHistory> historyList;
+
     @Override
     public Shape getShape(){
         if(!historyList.isEmpty()) {
@@ -34,18 +33,11 @@ public class CopyLastMoveStrategy implements Strategy{
                     break;
             }
         }
-
         return shape;
     }
 
     @Override
     public void setHistory(List<MatchHistory> historyList) {
         this.historyList = historyList;
-//        if(!historyList.isEmpty() && playerName == "Player1") {
-//            System.out.println("Player 2's last move: " + historyList.get(historyList.size() - 1).getInputs().getPlayer2());
-//        }
-//        if(!historyList.isEmpty() && playerName == "Player2") {
-//            System.out.println("Player 1's last move: " + historyList.get(historyList.size() - 1).getInputs().getPlayer1());
-//        }
     }
 }

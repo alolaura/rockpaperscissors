@@ -7,10 +7,10 @@ public class Scissors implements Shape {
 
     @Override
     public String versus(Shape shape) {
-        if(type.equals(shape.getType())){
+        if(shape.getType().equals(type)){
             return "DRAW";
         }
-        else if("rock".equals(shape.getType())){
+        else if(shape.getType().equals("rock")){
             return "LOSER";
         }
         else {

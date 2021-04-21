@@ -7,10 +7,10 @@ public class Rock implements Shape {
 
     @Override
     public String versus(Shape shape) {
-        if(type.equals(shape.getType())){
+        if(shape.getType().equals(type)){
             return "DRAW";
         }
-        else if("paper".equals(shape.getType())){
+        else if(shape.getType().equals("paper")){
             return "LOSER";
         }
         else {
