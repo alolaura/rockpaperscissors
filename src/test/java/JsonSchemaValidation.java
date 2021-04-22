@@ -14,11 +14,11 @@ public class JsonSchemaValidation {
     public void validate() throws FileNotFoundException {
         String cwd = System.getProperty("user.dir");
 
-        File schemaFile = new File(cwd + "\\" + "json-schema.json");
+        File schemaFile = new File(cwd + File.separator + "json-schema.json");
         JSONTokener schemaData = new JSONTokener(new FileInputStream(schemaFile));
         JSONObject jsonSchema = new JSONObject(schemaData);
 
-        File jsonData = new File(cwd + "\\" + "result.json");
+        File jsonData = new File(cwd + File.separator + "result.json");
         JSONTokener jsonDataFile = new JSONTokener(new FileInputStream(jsonData));
         //JSONObject jsonObject = new JSONObject(jsonDataFile);
         JSONArray jsonDataArray = new JSONArray(jsonDataFile);

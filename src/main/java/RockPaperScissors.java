@@ -4,6 +4,7 @@ import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import javax.json.bind.JsonbConfig;
 import javax.json.bind.config.PropertyNamingStrategy;
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,7 +24,7 @@ public class RockPaperScissors {
         String result = jsonb.toJson(matchHistoryList);
         try {
             String cwd = System.getProperty("user.dir");
-            Files.write( Paths.get(cwd + "\\" + fileName),result.getBytes());
+            Files.write( Paths.get(cwd + File.separator +  fileName),result.getBytes());
             System.out.println("File " + fileName + " generated in " + cwd);
         }
         catch (IOException e) {
