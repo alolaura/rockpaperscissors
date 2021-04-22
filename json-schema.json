@@ -1,7 +1,7 @@
 {
   "$schema": "http://json-schema.org/draft/2019-09/schema#",
   "title": "Check result",
-  "description": "This is a schema that matches MatchHistory objects",
+  "description": "This is a schema that matches an array of MatchHistory objects",
   "type": "array",
   "minItems" : 100,
   "maxItems" : 100,
