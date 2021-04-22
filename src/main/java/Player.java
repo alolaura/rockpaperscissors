@@ -8,6 +8,10 @@ public class Player implements Runnable {
     private int rounds;
     private Shape shape;
 
+    public Shape getShape() {
+        return shape;
+    }
+
     public String getName() {
         return name;
     }
@@ -27,15 +31,19 @@ public class Player implements Runnable {
                 e.printStackTrace();
             }
             shape = strategy.getShape();
+
             notify();
+
             rounds--;
         }
     }
 
-    public synchronized Shape getPlayerShape(List<MatchHistory> historyList) throws InterruptedException {
+    public synchronized void setPlayerShape(List<MatchHistory> historyList) throws InterruptedException {
         strategy.setHistory(historyList);
+
         notify();
         wait();
-        return shape;
     }
+
+
 }

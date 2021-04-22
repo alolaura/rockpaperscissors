@@ -20,7 +20,6 @@ public class JsonSchemaValidation {
 
         File jsonData = new File(cwd + File.separator + "result.json");
         JSONTokener jsonDataFile = new JSONTokener(new FileInputStream(jsonData));
-        //JSONObject jsonObject = new JSONObject(jsonDataFile);
         JSONArray jsonDataArray = new JSONArray(jsonDataFile);
 
         Schema schemaValidator = SchemaLoader.load(jsonSchema);

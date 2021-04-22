@@ -14,6 +14,20 @@ import java.util.List;
 
 public class RockPaperScissors {
 
+    public static String getWinner(Player p1, Player p2){
+        String winner;
+        if(p1.getShape().versus(p2.getShape()).equals("WINNER")){
+            winner = p1.getName();
+        }
+        else if(p1.getShape().versus(p2.getShape()).equals("LOSER")){
+            winner = p2.getName();
+        }
+        else{
+            winner = null;
+        }
+        return winner;
+    }
+
     public static void writeFile(List<MatchHistory> matchHistoryList){
 
         JsonbConfig jsonbConfig = new JsonbConfig()
@@ -55,21 +69,23 @@ public class RockPaperScissors {
             String winner;
 
             while(t1.getState() != Thread.State.WAITING) {}
-            p1Shape = p1.getPlayerShape(matchHistoryList);
+            p1.setPlayerShape(matchHistoryList);
 
             while(t2.getState() != Thread.State.WAITING) {}
-            p2Shape = p2.getPlayerShape(matchHistoryList);
+            p2.setPlayerShape(matchHistoryList);
 
-            if(p1Shape.versus(p2Shape).equals("WINNER")){
-                winner = p1.getName();
-            }
-            else if(p1Shape.versus(p2Shape).equals("LOSER")){
-                winner = p2.getName();
-            }
-            else{
-                winner = null;
-            }
-            matchHistory = new MatchHistory(roundNo + 1, winner, new Inputs(p1Shape.getType(), p2Shape.getType()));
+            winner = getWinner(p1, p2);
+
+//            if(p1Shape.versus(p2Shape).equals("WINNER")){
+//                winner = p1.getName();
+//            }
+//            else if(p1Shape.versus(p2Shape).equals("LOSER")){
+//                winner = p2.getName();
+//            }
+//            else{
+//                winner = null;
+//            }
+            matchHistory = new MatchHistory(roundNo + 1, winner, new Inputs(p1.getShape().getType(), p2.getShape().getType()));
             matchHistoryList.add(matchHistory);
         }
         t1.join();
