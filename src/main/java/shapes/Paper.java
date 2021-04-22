@@ -2,6 +2,7 @@ package shapes;
 
 public class Paper implements Shape {
     private final String type = "paper";
+
     @Override
     public String getType() {
         return type;
@@ -9,13 +10,11 @@ public class Paper implements Shape {
 
     @Override
     public String versus(Shape shape) {
-        if(shape.getType().equals(type)){
+        if (shape.getType().equals(type)) {
             return "DRAW";
-        }
-        else if(shape.getType().equals("scissors")){
+        } else if (shape.getType().equals("scissors")) {
             return "LOSER";
-        }
-        else {
+        } else {
             return "WINNER";
         }
     }

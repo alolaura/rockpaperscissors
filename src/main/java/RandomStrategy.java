@@ -12,9 +12,9 @@ public class RandomStrategy implements Strategy {
     private List<MatchHistory> historyList;
 
     @Override
-    public Shape getShape(){
+    public Shape getShape() {
         int shapeId = random.nextInt(3);
-        switch (shapeId){
+        switch (shapeId) {
             case 0:
                 shape = new Rock();
                 break;

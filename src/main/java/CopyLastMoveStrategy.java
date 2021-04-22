@@ -12,21 +12,20 @@ public class CopyLastMoveStrategy implements Strategy {
     private List<MatchHistory> historyList;
 
     @Override
-    public Shape getShape(){
-        if(!historyList.isEmpty()) {
-            if(historyList.get(historyList.size() - 1).getInputs().getPlayer1().equals("scissors")){
+    public Shape getShape() {
+        if (!historyList.isEmpty()) {
+            if (historyList.get(historyList.size() - 1).getInputs().getPlayer1().equals("scissors")) {
                 shape = new Scissors();
             }
-            if(historyList.get(historyList.size() - 1).getInputs().getPlayer1().equals("rock")){
+            if (historyList.get(historyList.size() - 1).getInputs().getPlayer1().equals("rock")) {
                 shape = new Rock();
             }
-            if(historyList.get(historyList.size() - 1).getInputs().getPlayer1().equals("paper")){
+            if (historyList.get(historyList.size() - 1).getInputs().getPlayer1().equals("paper")) {
                 shape = new Paper();
             }
-        }
-        else{
+        } else {
             int shapeId = random.nextInt(3);
-            switch (shapeId){
+            switch (shapeId) {
                 case 0:
                     shape = new Rock();
                     break;
