@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json-schema.org/draft/2019-09/schema#",
+  "title": "Check result",
+  "description": "This is a schema that matches MatchHistory objects",
+  "type": "array",
+  "minItems" : 100,
+  "maxItems" : 100,
+  "items": {
+      "type" : "object",
+      "properties" : {
+        "Round": {
+          "description": "The unique identifier for a match",
+          "type": "integer",
+          "minimum" : 1,
+          "maximum" : 100
+        },
+        "Winner": {
+          "description" : "The winner of the match",
+          "type" : ["string", "null"],
+          "enum" : ["Player1" , "Player2", null]
+        },
+        "Inputs" : {
+          "description" : "The shapes revealed by the players",
+          "type" : "object",
+          "properties" : {
+            "Player1" : {
+              "type" : "string",
+              "enum" : ["rock" , "paper" , "scissors"]
+            },
+            "Player2" : {
+              "type" : "string",
+              "enum" : ["rock" , "paper" , "scissors"]
+            }
+          },
+          "required" : ["Player1", "Player2"]
+        }
+      }
+  },
+  "required": [ "Round" , "Winner", "Inputs"]
+}
