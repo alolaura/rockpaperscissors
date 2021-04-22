@@ -14,11 +14,9 @@ public class MatchHistory {
         this.inputs = inputs;
     }
 
-    public Inputs getInputs() {
-        return inputs;
-    }
-    public int getRound() { return round; }
-    public String getWinner() { return winner; }
+    public Inputs getInputs() { return inputs;}
+    public int getRound() { return round;}
+    public String getWinner() { return winner;}
 
     public String toString(){
         return "Round: " + round + "\nWinner: " + winner + "\nInputs: " +
