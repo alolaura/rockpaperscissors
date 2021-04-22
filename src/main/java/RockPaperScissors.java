@@ -14,6 +14,7 @@ import java.util.List;
 public class RockPaperScissors {
 
     public static void writeFile(List<MatchHistory> matchHistoryList){
+
         JsonbConfig jsonbConfig = new JsonbConfig()
                 .withPropertyNamingStrategy(PropertyNamingStrategy.CASE_INSENSITIVE)
                 .withNullValues(true);
@@ -22,7 +23,7 @@ public class RockPaperScissors {
         String result = jsonb.toJson(matchHistoryList);
         try {
             String cwd = System.getProperty("user.dir");
-            Files.write( Paths.get(cwd + fileName),result.getBytes());
+            Files.write( Paths.get(cwd + "\\" + fileName),result.getBytes());
             System.out.println("File " + fileName + " generated in " + cwd);
         }
         catch (IOException e) {
@@ -67,7 +68,6 @@ public class RockPaperScissors {
             else{
                 winner = null;
             }
-
             matchHistory = new MatchHistory(roundNo + 1, winner, new Inputs(p1Shape.getType(), p2Shape.getType()));
             matchHistoryList.add(matchHistory);
         }
