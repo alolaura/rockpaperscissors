@@ -11,17 +11,17 @@ import java.util.Collections;
 import java.util.List;
 
 public class Game {
-    List<MatchHistory> matchHistoryList = Collections.synchronizedList(new ArrayList<>());
-    static final int rounds = 100;
+    private final List<MatchHistory> matchHistoryList = Collections.synchronizedList(new ArrayList<>());
+    private static final int rounds = 100;
 
-    Strategy randomStrategy = new RandomStrategy();
-    Strategy copyMoveStrategy = new CopyLastMoveStrategy();
+    private final Strategy randomStrategy = new RandomStrategy();
+    private final Strategy copyMoveStrategy = new CopyLastMoveStrategy();
 
-    Player p1 = new Player("Player1", randomStrategy, rounds);
-    Player p2 = new Player("Player2", copyMoveStrategy, rounds);
+    private final Player p1 = new Player("Player1", randomStrategy, rounds);
+    private final Player p2 = new Player("Player2", copyMoveStrategy, rounds);
 
-    Thread t1 = new Thread(p1);
-    Thread t2 = new Thread(p2);
+    private final Thread t1 = new Thread(p1);
+    private final Thread t2 = new Thread(p2);
 
     public void init() {
         t1.start();
@@ -55,9 +55,10 @@ public class Game {
 
     private String getWinner(Player p1, Player p2) {
         String winner;
-        if (p1.getShape().versus(p2.getShape()).equals("WINNER")) {
+        String matchResult = p1.getShape().versus(p2.getShape());
+        if (matchResult.equals("WINNER")) {
             winner = p1.getName();
-        } else if (p1.getShape().versus(p2.getShape()).equals("LOSER")) {
+        } else if (matchResult.equals("LOSER")) {
             winner = p2.getName();
         } else {
             winner = null;
@@ -66,7 +67,6 @@ public class Game {
     }
 
     private void writeFile(List<MatchHistory> matchHistoryList) {
-
         JsonbConfig jsonbConfig = new JsonbConfig()
                 .withPropertyNamingStrategy(PropertyNamingStrategy.CASE_INSENSITIVE)
                 .withNullValues(true);
