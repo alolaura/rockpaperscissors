@@ -14,14 +14,17 @@ public class CopyLastMoveStrategy implements Strategy {
     @Override
     public Shape getShape() {
         if (!historyList.isEmpty()) {
-            if (historyList.get(historyList.size() - 1).getInputs().getPlayer1().equals("scissors")) {
-                shape = new Scissors();
-            }
-            if (historyList.get(historyList.size() - 1).getInputs().getPlayer1().equals("rock")) {
-                shape = new Rock();
-            }
-            if (historyList.get(historyList.size() - 1).getInputs().getPlayer1().equals("paper")) {
-                shape = new Paper();
+            String shapeStr = historyList.get(historyList.size() - 1).getInputs().getPlayer1();
+            switch (shapeStr) {
+                case "scissors":
+                    shape = new Scissors();
+                    break;
+                case "rock":
+                    shape = new Rock();
+                    break;
+                case "paper":
+                    shape = new Paper();
+                    break;
             }
         } else {
             int shapeId = random.nextInt(3);
