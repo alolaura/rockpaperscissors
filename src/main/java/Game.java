@@ -53,7 +53,7 @@ public class Game {
         writeFile(matchHistoryList);
     }
 
-    public static String getWinner(Player p1, Player p2) {
+    private String getWinner(Player p1, Player p2) {
         String winner;
         if (p1.getShape().versus(p2.getShape()).equals("WINNER")) {
             winner = p1.getName();
@@ -65,7 +65,7 @@ public class Game {
         return winner;
     }
 
-    public static void writeFile(List<MatchHistory> matchHistoryList) {
+    private void writeFile(List<MatchHistory> matchHistoryList) {
 
         JsonbConfig jsonbConfig = new JsonbConfig()
                 .withPropertyNamingStrategy(PropertyNamingStrategy.CASE_INSENSITIVE)
